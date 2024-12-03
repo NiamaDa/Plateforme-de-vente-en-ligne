@@ -1,0 +1,25 @@
+﻿@page
+@model ECommerceWebApp.Pages.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2>Passer la commande</h2>
+
+@if (Model.CartItems.Count > 0)
+{
+    <ul>
+        @foreach (var item in Model.CartItems)
+        {
+            <li>@item.Name - Quantité: @item.Quantity</li>
+        }
+    </ul>
+
+    <form method="post">
+        <button type="submit" class="btn btn-success">Passer la commande</button>
+    </form>
+}
+else
+{
+    <p>Votre panier est vide.</p>
+}

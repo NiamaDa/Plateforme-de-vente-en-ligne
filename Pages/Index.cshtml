@@ -1,0 +1,80 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Produits";
+}
+
+<!-- Carrousel d'images en haut de la page -->
+<div id="productCarousel" class="carousel slide" data-bs-ride="carousel" style="width: 100vw; height: 50vh; position: relative; overflow: hidden;">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner" style="height: 100%;">
+        <div class="carousel-item active" style="height: 100%;">
+            <img src="/images/banner1.jpg" class="d-block w-100" style="height: 100%; width: auto; max-width: none; object-fit: contain;" alt="Image 1">
+        </div>
+        <div class="carousel-item" style="height: 100%;">
+            <img src="/images/banner2.jpg" class="d-block w-100" style="height: 100%; width: auto; max-width: none; object-fit: contain;" alt="Image 2">
+        </div>
+        <div class="carousel-item" style="height: 100%;">
+            <img src="/images/banner3.jpg" class="d-block w-100" style="height: 100%; width: auto; max-width: none; object-fit: contain;" alt="Image 3">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Styles CSS supplémentaires pour éliminer le blanc entre les bannières -->
+<style>
+    .carousel-item {
+        transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .carousel-inner {
+        height: 100%;
+    }
+
+    .carousel-item img {
+        max-height: 100%; /* Permet de garantir que l'image reste dans les limites de la hauteur */
+        width: auto; /* Force l'image à s'ajuster selon la largeur tout en maintenant les proportions */
+        max-width: none; /* Évite que l'image soit contrainte par sa largeur maximum */
+        object-fit: contain; /* Permet à l'image de s'afficher entièrement sans être masquée */
+    }
+</style>
+
+
+<!-- Liste des catégories de produits avec des images redimensionnées -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Nos Catégories de Produits</h2>
+    <div class="row">
+        @foreach (var category in Model.Categories)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-light">
+                    <img src="@category.ImageUrl" class="card-img-top" style="height: 250px; object-fit: cover;" alt="@category.Name" />
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@category.Name</h5>
+                        <p class="card-text">@category.Description</p>
+                        <a asp-page="/ProductsByCategory" asp-route-categoryId="@category.Id" style="color: #007185;">Voir Produits</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center py-4" style="background-color: #f8f9fa;">
+    <p class="mb-0">© 2024 Votre Entreprise. Tous droits réservés.</p>
+</footer>
+
+<!-- Lien vers Bootstrap CSS si ce n'est pas déjà fait -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha384-..." crossorigin="anonymous">

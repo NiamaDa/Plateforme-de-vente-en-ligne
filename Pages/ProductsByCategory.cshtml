@@ -1,0 +1,43 @@
+﻿@page
+@model ECommerceWebApp.Pages.ProductsByCategoryModel
+@{
+    ViewData["Title"] = "Produits de la Catégorie - " + Model.ProductList?.CategoryName;
+}
+
+<h2 class="text-center mb-4">Produits de la Catégorie: @Model.ProductList?.CategoryName</h2>
+
+<div class="container">
+    <div class="row">
+        @if (Model.ProductList?.Products != null && Model.ProductList.Products.Any())
+        {
+            foreach (var product in Model.ProductList.Products)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm border-light">
+                        <img src="@product.ImageUrl" class="card-img-top" style="height: 250px; object-fit: cover;" alt="@product.Name" />
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text">@product.Description</p>
+                            <p class="card-text">@String.Format("{0:F2} DH", product.Price)</p>
+                            <a asp-page="/Detail" asp-route-id="@product.Id" style="color: #007185;">Voir Détails</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center">
+                <p>Aucun produit trouvé dans cette catégorie.</p>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center py-4" style="background-color: #f8f9fa;">
+    <p class="mb-0">© 2024 Votre Entreprise. Tous droits réservés.</p>
+</footer>
+
+<!-- Lien vers Bootstrap CSS si ce n'est pas déjà fait -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha384-..." crossorigin="anonymous">

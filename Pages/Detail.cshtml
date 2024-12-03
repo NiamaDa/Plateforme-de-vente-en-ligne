@@ -1,0 +1,46 @@
+﻿@page "{id:int}"
+@model ECommerceWebApp.Pages.DetailModel
+@{
+    ViewData["Title"] = Model.Product.Name;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img src="@Url.Content("~/" + Model.Product.ImageUrl)" alt="@Model.Product.ImageUrl" class="img-fluid" style="max-width: 300px;" />
+        </div>
+
+        <div class="col-md-4">
+            <h2>@Model.Product.Name</h2>
+            <p>@Model.Product.Description</p>
+            <h3>Prix: @Model.Product.Price.ToString("F2") DH</h3>
+            <p>Stock disponible : @Model.Product.Stock</p>
+        </div>
+
+        <div class="col-md-4">
+            <div class="border p-3">
+                <h3 class="text-success">@if (Model.Product.Stock > 0)
+                    {
+                        <span>En stock</span>
+                    }</h3>
+                <h4 class="text-danger">@if (Model.Product.Stock == 0)
+                    {
+                        <span>Rupture de stock</span>
+                    }</h4>
+
+                <form method="post" asp-page-handler="AddToCart">
+                    <input type="hidden" name="id" value="@Model.Product.Id" />
+                    <label for="quantity">Quantité :</label>
+                    <input type="number" name="quantity" min="1" value="1" class="form-control" />
+                    <button type="submit" class="btn btn-warning btn-block mb-2">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bouton de retour à la page précédente, centré et de taille fixe -->
+        <div class="d-flex justify-content-end mt-3">
+            <button class="btn btn-secondary" style="width: 300px;" onclick="window.history.back();">Retour à la page précédente</button>
+        </div>
+
+    </div>
+</div>

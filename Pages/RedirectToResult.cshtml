@@ -1,0 +1,15 @@
+﻿@page
+@model RedirectToResultModel
+@{
+    ViewData["Title"] = "Résultats de la recherche";
+}
+
+<div class="container mt-4">
+    <h2>Résultats de la recherche</h2>
+
+    <!-- Affichage d'un message si la recherche n'a pas renvoyé de résultats -->
+    <div class="alert alert-info">
+        <p>Aucun produit ou catégorie ne correspond à votre recherche.</p>
+        <a href="/" class="btn btn-primary">Retour à la page d'accueil</a>
+    </div>
+</div>
